@@ -4,7 +4,7 @@ A discord bot originally made for RiTeh students on discord
 
 You can invite it here: https://discord.com/oauth2/authorize?client_id=764161843823902761&scope=bot&permissions=2146958847
 
-The best feature it has is the meme fetcher. 
+The best feature by far is the meme fetcher. 
 
 ?meme responds with a random meme from reddit. 
 The next meme is just one convenient click away!
