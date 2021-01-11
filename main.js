@@ -8,6 +8,8 @@ const { prefix, token } = require("./config.json");
 
 const ytdl = require("ytdl-core");
 
+let array = []
+
 global.queue = new Map();
 global.helpEmbed = new discord.MessageEmbed()
   .setColor("#0099ff")
@@ -51,7 +53,13 @@ client.on("message", async (message) => {
   //Leaves the command execution to specific command files
   try {
     const serverQueue = global.queue.get(message.guild.id);
-    client.commands.get(args[0].toLowerCase()).execute(message, serverQueue);
+    message.myarray = array
+    if(client.commands.get(args[0].toLowerCase()).name === 'meme')
+      client.commands.get(args[0].toLowerCase()).meme(message, client);
+    else {
+      message.client = client;
+      client.commands.get(args[0].toLowerCase()).execute(message, serverQueue);
+    }
   } catch {
     if (args[0] === "help") {
       message.channel.send(helpEmbed);

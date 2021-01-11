@@ -1,0 +1,8 @@
+ const embed = new MessageEmbed()
+        .setTitle(video.title)
+        .setImage(video.thumbnail)
+        .setColor("RED")
+        .setDescription(`**[${video.link}](${video.link})**`)
+        .setAuthor(video.author.name)
+        .addField("Views", video.views.toLocaleString(), true)
+        .addField("Duration", video.duration, true);

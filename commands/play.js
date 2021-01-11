@@ -25,8 +25,20 @@ module.exports = {
     try {
       songInfo = await ytdl.getInfo(args.slice(1).join(" "));
     } catch {
-      const result = await ytsr(args.slice(1).join(" ")).catch((e) => {
-        return message.channel.send("No results found");
+      let result;
+      console.log(args.slice(1).join(" "))
+      ytsr.getFilters(args.slice(1).join(" ")).then(async (filters1) => {
+        const filter1 = filters1.get('Type').find(o => o.name === 'Video');
+        const filters2 = await ytsr.getFilters(filter1.ref);
+        const filter2 = filters2.get('Duration').find(o => o.name.startsWith('Short'));
+        const options = {
+          limit: 5,
+          nextpageRef: filter2.ref,
+        }
+        result = await ytsr(null, options);
+        dosth(searchResults);
+      }).catch(err => {
+        console.error(err);
       });
       try{ video = result.items.filter((i) => i.type === "video")[0];}
       catch{ return message.channel.send("No video found");}
@@ -89,8 +101,8 @@ module.exports = {
           play(guild, serverQueue.songs[0]);
         })
         .on("error", (error) => console.error(error));
-      dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-      (async () => {
+      dispatcher.setVolumeLogarithmic(serverQueue.volume / 5).on('error', error => console.error(error));
+      (async () => { 
         const embed = new MessageEmbed()
           .setTitle(song.video.title)
           .setImage(song.video.thumbnail)
