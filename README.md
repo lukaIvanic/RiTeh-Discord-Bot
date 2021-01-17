@@ -12,8 +12,8 @@ The bot automatically generates a reaction so you're always ready for the next m
 
 
 It can't play music as of late because of an issue with a third party library (ytdl).
-Ytdl is used for getting search results from yt.
-No urls, no http stream, no music;
+Ytdl is used for getting search results from youtube.
+No urls mean no http stream which means no music;
 But either way the music function wasn't viable because it depended on my local internet.
 
 The bot is online when I have the server up on my local computer.
